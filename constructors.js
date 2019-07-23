@@ -15,7 +15,10 @@
 */
 
 // Code here
-
+function CarFactory(make, model) {
+  this.make = make; 
+  this.model = model;
+}
 ////////// PROBLEM 2 //////////
 
 // Do not edit the code below.
@@ -25,7 +28,7 @@ function Employee(name, email, hireDate) {
   this.email = email;
   this.hireDate = hireDate;
 }
-
+var bob = new Employee('Bob', 'bob@gmail.com', '01-02-98');
 // Do not edit the code above.
 
 /*
@@ -57,7 +60,16 @@ mustang.moveCar(); // Increments mustang' move property by 10. Returns the new m
 */
 
 // Code here
+function Car(make, model, year) {
+  this.make = make;
+  this.model = model;
+  this.year = year;
+  this.move = 0;
 
+  this.moveCar = function() {
+    return this.move += 10;
+  }
+}
 ////////// PROBLEM 4 //////////
 
 /*
@@ -75,6 +87,10 @@ function Movie(name, genre, rating) {
   this.rating = rating;
 }
 
+Movie.prototype.changeRating = number => {
+  return (this.rating = (this.rating + number) / 2);
+};
+
 // Code here
 
 ////////// PROBLEM 5 //////////
@@ -85,6 +101,23 @@ function Movie(name, genre, rating) {
 
 // Code here
 
+function User(name, age, email, savedPosts = []) {
+  this.name = name;
+  this.age = age;
+  this.email = email;
+  this.savedPosts = savedPosts;
+}
+console.log();
+
+User.prototype.addSavedPost = function savedPost(id, title, rating) {
+  this.id = id;
+  this.title = title;
+  this.rating = rating;
+  console.log(this.savedPosts);
+  this.savedPosts.push(this);
+  return this.savedPosts;
+};
+
 ////////// PROBLEM 6 //////////
 
 // You will be using the constructor function you just created in problem 5.
@@ -92,9 +125,27 @@ function Movie(name, genre, rating) {
 
 // Code here
 
+User.prototype.removeSavedPost = function(id) {
+  for (let i = 0; i < this.savedPosts.length; i++) {
+    if (this.savedPosts[i].id === id) {
+      this.savedPosts.splice(i, 1);
+      return this.savedPosts;
+    }
+  }
+};
+
 ////////// PROBLEM 7 //////////
 
 // You will continue to use the constructor function you created in problem 5.
 // Write a prototype method for the User constructor function named changePostRating that will take in two number parameters. The first will be an id (a number) and the second will be the new rating (a number). Use the id to find the matching object in the savedPosts array. Once you find the matching object, update it's rating score with the new rating parameter.
 
 // Code here
+
+User.prototype.changePostRating = function(id, rating) {
+  for (let i = 0; i < this.savedPosts.length; i++) {
+    if (this.savedPosts[i].id === id ) {
+      this.savedPosts[i].rating = rating;
+      return this.savedPosts;
+    }
+  }
+}
