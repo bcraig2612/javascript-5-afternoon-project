@@ -143,9 +143,10 @@ User.prototype.removeSavedPost = function(id) {
 
 User.prototype.changePostRating = function(id, rating) {
   for (let i = 0; i < this.savedPosts.length; i++) {
+    // Use the id to find the matching object in the savedPosts array
     if (this.savedPosts[i].id === id ) {
+    // Update it's rating score with the new rating parameter.
       this.savedPosts[i].rating = rating;
-      return this.savedPosts;
     }
-  }
+  };
 }
